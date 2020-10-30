@@ -310,7 +310,10 @@ public class CS400Graph<T> implements GraphADT<T>
      */
     public void extend(Edge edge)
     {
-      // TODO: Implement this method in Step 6.
+      //update path fields
+      this.distance += edge.weight;
+      this.dataSequence.add(edge.target.data);
+      this.end = edge.target;
     }
 
     /**
