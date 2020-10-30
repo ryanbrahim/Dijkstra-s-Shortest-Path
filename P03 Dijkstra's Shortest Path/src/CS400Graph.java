@@ -39,7 +39,7 @@ public class CS400Graph<T> implements GraphADT<T>
     }
   }
 
-  protected Hashtable<T, Vertex> vertices; // holds graph verticies, key=data
+  protected Hashtable<T, Vertex> vertices; // holds graph vertices, key=data
 
   public CS400Graph()
   {
@@ -115,7 +115,7 @@ public class CS400Graph<T> implements GraphADT<T>
       throw new IllegalArgumentException("Cannot add edge with vertices that do not exist");
     if(weight < 0)
       throw new IllegalArgumentException("Cannot add edge with negative weight");
-    // handle cases where edge already exists between these verticies
+    // handle cases where edge already exists between these vertices
     for (Edge e : sourceVertex.edgesLeaving)
       if(e.target == targetVertex)
       {
@@ -256,9 +256,9 @@ public class CS400Graph<T> implements GraphADT<T>
   }
 
   /**
-   * Path objects store a discovered path of vertices and the overal distance of cost of the
+   * Path objects store a discovered path of vertices and the overall distance of cost of the
    * weighted directed edges along this path. Path objects can be copied using the copy constructor,
-   * and then extended to include new edges and verticies, one at a time. In comparison to a
+   * and then extended to include new edges and vertices, one at a time. In comparison to a
    * predecessor table which is sometimes used to implement Dijkstra's algorithm, this eliminates
    * the need for tracing paths backwards from the destination vertex to the starting vertex at the
    * end of the algorithm.
@@ -266,7 +266,7 @@ public class CS400Graph<T> implements GraphADT<T>
   protected class Path implements Comparable<Path>
   {
     public Vertex start; // first vertex within path
-    public int distance; // sumed weight of all edges in path
+    public int distance; // summed weight of all edges in path
     public List<T> dataSequence; // ordered sequence of data from vertices in path
     public Vertex end; // last vertex within path
 
@@ -293,7 +293,13 @@ public class CS400Graph<T> implements GraphADT<T>
      */
     public Path(Path source)
     {
-      // TODO: Implement this constructor in Step 5.
+      this.start = new Vertex(source.start.data);
+      this.end = new Vertex(source.end.data);
+      this.distance = source.distance;
+      List<T> oldSeq = source.dataSequence;
+      this.dataSequence = new LinkedList<>();
+      for(T curData : oldSeq)
+        this.dataSequence.add(curData);
     }
 
     /**
