@@ -298,7 +298,7 @@ public class CS400Graph<T> implements GraphADT<T>
       this.distance = source.distance;
       List<T> oldSeq = source.dataSequence;
       this.dataSequence = new LinkedList<>();
-      for(T curData : oldSeq)
+      for (T curData : oldSeq)
         this.dataSequence.add(curData);
     }
 
@@ -310,7 +310,7 @@ public class CS400Graph<T> implements GraphADT<T>
      */
     public void extend(Edge edge)
     {
-      //update path fields
+      // update path fields
       this.distance += edge.weight;
       this.dataSequence.add(edge.target.data);
       this.end = edge.target;
@@ -350,7 +350,49 @@ public class CS400Graph<T> implements GraphADT<T>
    */
   protected Path dijkstrasShortestPath(T start, T end)
   {
-    return null; // TODO: Implement this method in Step 8.
+    //check that start and end vertices exist within the graph
+    if(!containsVertex(start) || !containsVertex(end))
+      throw new NoSuchElementException("Start/end vertex does not exist within graph");
+    
+    // create the priority queue object
+    PriorityQueue<Path> queue = new PriorityQueue<Path>();
+    // create a HashTable to keep track of visited vertices
+    Hashtable<T, Vertex> visited = new Hashtable<T, Vertex>();
+    // add a path with the initial start vertex in it to the queue
+    queue.add(new Path(new Vertex(start)));
+
+    // begin Dijkstra loop (IE iterating through the queue)
+    while (!queue.isEmpty())
+    {
+      //initialize the current path to be the next path in the queue
+      Path curPath = queue.remove();
+      // define the current vertex to be the last vertex on a path
+      Vertex curVertex = curPath.end;
+      // make sure curVertex is unvisited, otherwise find next smallest path in queue
+      while (visited.contains(curVertex.data))
+      {
+        curPath = queue.remove();
+        curVertex = curPath.end;
+      }
+      // we have now visited this vertex, add it to visited
+      visited.put(curVertex.data, curVertex);
+      // iterate through curVertex's adjacent vertices, add them to the queue as new extended paths
+      for (Edge curEdge : curVertex.edgesLeaving)
+      {
+        // copy over current path
+        Path newPath = new Path(curPath);
+        // extend path with current edge
+        newPath.extend(curEdge);
+        // add new path to the queue
+        queue.add(newPath);
+        //check if we have found a path to the target vertex
+        if(newPath.end.data.equals(end))
+          return newPath;
+      }
+    }
+
+    //if we have reached the end of the while loop without returning, that means there is no path
+    throw new NoSuchElementException("No path from start to end can be found");
   }
 
   /**
