@@ -359,7 +359,7 @@ public class CS400Graph<T> implements GraphADT<T>
     // create a HashTable to keep track of visited vertices
     Hashtable<T, Vertex> visited = new Hashtable<T, Vertex>();
     // add a path with the initial start vertex in it to the queue
-    queue.add(new Path(new Vertex(start)));
+    queue.add(new Path(vertices.get(start)));
 
     // begin Dijkstra loop (IE iterating through the queue)
     while (!queue.isEmpty())
