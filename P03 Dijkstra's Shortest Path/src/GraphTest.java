@@ -38,8 +38,8 @@ public class GraphTest {
     }
 
     /**
-     * Checks the distance/total weight cost from the vertex labelled 0 to 8
-     * (should be 15), and from the vertex labelled 9 to 8 (should be 17).
+     * Checks the distance/total weight cost from the vertex labeled 0 to 8
+     * (should be 15), and from the vertex labeled 9 to 8 (should be 17).
      */
     @Test
     public void providedTestToCheckPathCosts() {
@@ -49,7 +49,7 @@ public class GraphTest {
 
     /**
      * Checks the ordered sequence of data within vertices from the vertex 
-     * labelled 0 to 8, and from the vertex labelled 9 to 8.
+     * labeled 0 to 8, and from the vertex labeled 9 to 8.
      */
     @Test
     public void providedTestToCheckPathContents() {
