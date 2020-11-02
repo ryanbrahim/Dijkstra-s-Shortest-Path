@@ -372,11 +372,7 @@ public class CS400Graph<T> implements GraphADT<T>
       // define the current vertex to be the last vertex on a path
       Vertex curVertex = curPath.end;
       // make sure curVertex is unvisited, otherwise find next smallest path in queue
-      while (visited.contains(curVertex.data))
-      {
-        curPath = queue.remove();
-        curVertex = curPath.end;
-      }
+
       // we have now visited this vertex, add it to visited
       visited.put(curVertex.data, curVertex);
       // iterate through curVertex's adjacent vertices, add them to the queue as new extended paths
@@ -384,10 +380,12 @@ public class CS400Graph<T> implements GraphADT<T>
       {
         // copy over current path
         Path newPath = new Path(curPath);
-        // extend path with current edge
-        newPath.extend(curEdge);
-        // add new path to the queue
-        queue.add(newPath);
+    	// extend path with current edge
+    	newPath.extend(curEdge);
+        //check if path's target has already been visited/queued
+        if(!queue.contains(newPath))
+	        // add new path to the queue
+	        queue.add(newPath);
       }
     }
 
