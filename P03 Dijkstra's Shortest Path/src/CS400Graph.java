@@ -1,3 +1,10 @@
+// --== CS400 File Header Information ==--
+// Name: Ryan Almizyed
+// Email: almizyed@wisc.edu
+// Team: MG
+// TA: Harit
+// Lecturer: Florian Heimerl
+// Notes to Grader: <optional extra notes>
 import java.util.Hashtable;
 import java.util.List;
 import java.util.LinkedList;

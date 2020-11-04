@@ -1,3 +1,10 @@
+// --== CS400 File Header Information ==--
+// Name: Ryan Almizyed
+// Email: almizyed@wisc.edu
+// Team: MG
+// TA: Harit
+// Lecturer: Florian Heimerl
+// Notes to Grader: <optional extra notes>
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertTrue;
