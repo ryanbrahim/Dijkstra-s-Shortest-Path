@@ -68,7 +68,7 @@ public class GraphTest
     assertTrue(graph.shortestPath(0, 8).toString().equals("[0, 2, 6, 3, 1, 8]"));
     assertTrue(graph.shortestPath(9, 8).toString().equals("[9, 4, 5, 1, 8]"));
   }
-  
+
   /**
    * Checks that the distance from vertex 3 to vertex 5 is 14 as determined in activity.
    */
@@ -77,14 +77,42 @@ public class GraphTest
   {
     assertTrue(graph.getPathCost(3, 5) == 14);
   }
-  
+
   /**
-   * Checks that the sequence from vertex 3 to vertex 5 is 
+   * Checks that the sequence from vertex 3 to vertex 5 is
    */
   @Test
   public void myTestConfirmPathSequence()
   {
     assertTrue(graph.shortestPath(3, 5).toString().equals("[3, 7, 0, 2, 4, 5]"));
+  }
+
+  /**
+   * Checks that a path from a vertex to the same vertex is a path cost of 0
+   */
+  @Test
+  public void myTestConfirmPathToSelf()
+  {
+    assertTrue(graph.getPathCost(3, 3) == 0);
+  }
+
+  /**
+   * Checks that a correct path that has a high weight will be replaced by a path with a smaller
+   * weight once discovered later on. I.E. the path from 1 to 3.
+   */
+  @Test
+  public void myTestNonObviousShortestPath()
+  {
+    CS400Graph<Integer> myGraph = new CS400Graph<>();
+    // insert vertices 1-3
+    for (int i = 1; i <= 3; i++)
+      myGraph.insertVertex(i);
+    myGraph.insertEdge(1, 3, 3);
+    myGraph.insertEdge(1, 2, 1);
+    myGraph.insertEdge(2, 3, 1);
+
+    System.out.println(myGraph.shortestPath(1, 3).toString());
+    assertTrue(myGraph.shortestPath(1, 3).toString().equals("[1, 2, 3]"));
   }
 
 }

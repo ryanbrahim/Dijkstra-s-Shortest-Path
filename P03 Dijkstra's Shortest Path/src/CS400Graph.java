@@ -300,8 +300,8 @@ public class CS400Graph<T> implements GraphADT<T>
      */
     public Path(Path source)
     {
-      this.start = new Vertex(source.start.data);
-      this.end = new Vertex(source.end.data);
+      this.start = source.start;
+      this.end = source.end;
       this.distance = source.distance;
       List<T> oldSeq = source.dataSequence;
       this.dataSequence = new LinkedList<>();
@@ -357,10 +357,10 @@ public class CS400Graph<T> implements GraphADT<T>
    */
   protected Path dijkstrasShortestPath(T start, T end)
   {
-    //check that start and end vertices exist within the graph
+    // check that start and end vertices exist within the graph
     if(!containsVertex(start) || !containsVertex(end))
       throw new NoSuchElementException("Start/end vertex does not exist within graph");
-    
+
     // create the priority queue object
     PriorityQueue<Path> queue = new PriorityQueue<Path>();
     // create a HashTable to keep track of visited vertices
@@ -371,11 +371,11 @@ public class CS400Graph<T> implements GraphADT<T>
     // begin Dijkstra loop (IE iterating through the queue)
     while (!queue.isEmpty())
     {
-      //initialize the current path to be the next path in the queue
+      // initialize the current path to be the next path in the queue
       Path curPath = queue.remove();
-      //check if we have found a path to the target vertex
+      // check if we have found a path to the target vertex
       if(curPath.end.data.equals(end))
-          return curPath;
+        return curPath;
       // define the current vertex to be the last vertex on a path
       Vertex curVertex = curPath.end;
       // make sure curVertex is unvisited, otherwise find next smallest path in queue
@@ -398,7 +398,7 @@ public class CS400Graph<T> implements GraphADT<T>
       }
     }
 
-    //if we have reached the end of the while loop without returning, that means there is no path
+    // if we have reached the end of the while loop without returning, that means there is no path
     throw new NoSuchElementException("No path from start to end can be found");
   }
 
