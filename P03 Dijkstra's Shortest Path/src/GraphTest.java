@@ -68,5 +68,23 @@ public class GraphTest
     assertTrue(graph.shortestPath(0, 8).toString().equals("[0, 2, 6, 3, 1, 8]"));
     assertTrue(graph.shortestPath(9, 8).toString().equals("[9, 4, 5, 1, 8]"));
   }
+  
+  /**
+   * Checks that the distance from vertex 3 to vertex 5 is 14 as determined in activity.
+   */
+  @Test
+  public void myTestConfirmPathCost()
+  {
+    assertTrue(graph.getPathCost(3, 5) == 14);
+  }
+  
+  /**
+   * Checks that the sequence from vertex 3 to vertex 5 is 
+   */
+  @Test
+  public void myTestConfirmPathSequence()
+  {
+    assertTrue(graph.shortestPath(3, 5).toString().equals("[3, 7, 0, 2, 4, 5]"));
+  }
 
 }
