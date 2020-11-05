@@ -373,11 +373,11 @@ public class CS400Graph<T> implements GraphADT<T>
     {
       // initialize the current path to be the next path in the queue
       Path curPath = queue.remove();
+      // define the current vertex to be the last vertex on a path
+      Vertex curVertex = curPath.end;
       // check if we have found a path to the target vertex
       if(curPath.end.data.equals(end))
         return curPath;
-      // define the current vertex to be the last vertex on a path
-      Vertex curVertex = curPath.end;
       // make sure curVertex is unvisited, otherwise find next smallest path in queue
       while (visited.contains(curVertex.data))
       {
