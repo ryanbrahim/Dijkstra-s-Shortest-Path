@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.NoSuchElementException;
-import java.util.Arrays;
 
 public class CS400Graph<T> implements GraphADT<T>
 {
