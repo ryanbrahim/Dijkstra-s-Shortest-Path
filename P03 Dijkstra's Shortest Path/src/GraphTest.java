@@ -111,7 +111,6 @@ public class GraphTest
     myGraph.insertEdge(1, 2, 1);
     myGraph.insertEdge(2, 3, 1);
 
-    System.out.println(myGraph.shortestPath(1, 3).toString());
     assertTrue(myGraph.shortestPath(1, 3).toString().equals("[1, 2, 3]"));
   }
 

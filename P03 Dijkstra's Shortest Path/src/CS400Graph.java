@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.NoSuchElementException;
+import java.util.Arrays;
 
 public class CS400Graph<T> implements GraphADT<T>
 {
@@ -364,7 +365,7 @@ public class CS400Graph<T> implements GraphADT<T>
     // create the priority queue object
     PriorityQueue<Path> queue = new PriorityQueue<Path>();
     // create a HashTable to keep track of visited vertices
-    Hashtable<T, Vertex> visited = new Hashtable<T, Vertex>();
+    Hashtable<Vertex, Vertex> visited = new Hashtable<Vertex, Vertex>();
     // add a path with the initial start vertex in it to the queue
     queue.add(new Path(vertices.get(start)));
 
@@ -375,17 +376,20 @@ public class CS400Graph<T> implements GraphADT<T>
       Path curPath = queue.remove();
       // define the current vertex to be the last vertex on a path
       Vertex curVertex = curPath.end;
+      // make sure curVertex is unvisited, otherwise find next smallest path in queue
+      while (visited.containsKey(curVertex))
+        if(!queue.isEmpty())
+        {
+          curPath = queue.remove();
+          curVertex = curPath.end;
+        }
+        else
+          throw new NoSuchElementException("No path from start to end can be found");
       // check if we have found a path to the target vertex
       if(curPath.end.data.equals(end))
         return curPath;
-      // make sure curVertex is unvisited, otherwise find next smallest path in queue
-      while (visited.contains(curVertex.data))
-      {
-        curPath = queue.remove();
-        curVertex = curPath.end;
-      }
       // we have now visited this vertex, add it to visited
-      visited.put(curVertex.data, curVertex);
+      visited.put(curVertex, curVertex);
       // iterate through curVertex's adjacent vertices, add them to the queue as new extended paths
       for (Edge curEdge : curVertex.edgesLeaving)
       {
@@ -397,7 +401,6 @@ public class CS400Graph<T> implements GraphADT<T>
         queue.add(newPath);
       }
     }
-
     // if we have reached the end of the while loop without returning, that means there is no path
     throw new NoSuchElementException("No path from start to end can be found");
   }
